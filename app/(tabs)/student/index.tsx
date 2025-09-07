@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Alert, RefreshControl, ScrollView, TouchableOpacity } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
+import * as Location from 'expo-location'
 import { LinearGradient } from 'expo-linear-gradient'
 import { supabase } from '@/lib/supabase'
 import { AlertTriangle, Clock, MapPin, RefreshCw, Navigation, Zap } from 'lucide-react-native'
@@ -32,8 +33,9 @@ interface ServiceAlert {
 }
 
 interface ETA {
-  vehicle_id: string
-  stop_id: string
+  id?: string
+  vehicle_id?: string
+  stop_id?: string
   stop_name: string
   estimated_arrival: string
   distance_km: number
@@ -140,18 +142,46 @@ export default function StudentScreen() {
     }
   }
 
+  const centerMapOnUser = async () => {
+    try {
+      // Request location permissions
+      const { status } = await Location.requestForegroundPermissionsAsync()
+      if (status !== 'granted') {
+        Alert.alert('Permission denied', 'Location access is required to center the map on your location')
+        return
+      }
+
+      // Get current location
+      const location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.High,
+      })
+
+      // Update map region to center on user location
+      setRegion({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.005, // Zoom in closer than default
+        longitudeDelta: 0.005,
+      })
+
+    } catch (error) {
+      console.error('Error getting location:', error)
+      Alert.alert('Error', 'Unable to get your current location')
+    }
+  }
+
   return (
     <View style={styles.container}>
-      {/* Header with Gradient */}
+      {/* Header with Gradient - extends to top of screen */}
       <LinearGradient
         colors={['#4B0082', '#6B46C1']}
         style={styles.header}
       >
         <View style={styles.headerContent}>
           <View style={styles.headerTop}>
-            <View style={styles.headerIcon}>
+            <TouchableOpacity onPress={centerMapOnUser} style={styles.headerIcon}>
               <Navigation size={24} color="#FFFFFF" />
-            </View>
+            </TouchableOpacity>
             <TouchableOpacity onPress={onRefresh} style={styles.refreshButton}>
               <RefreshCw size={20} color="#FFFFFF" />
             </TouchableOpacity>
@@ -250,8 +280,8 @@ export default function StudentScreen() {
         </View>
 
         {etas.length > 0 ? (
-          etas.slice(0, 5).map((eta) => (
-            <View key={`${eta.vehicle_id}-${eta.stop_id}`} style={styles.etaItem}>
+          etas.slice(0, 5).map((eta, index) => (
+            <View key={eta.id || `eta-${index}`} style={styles.etaItem}>
               <View style={styles.etaStop}>
                 <Text style={styles.etaStopName}>{eta.stop_name}</Text>
                 <Text style={styles.etaDistance}>{eta.distance_km.toFixed(1)} km away</Text>
@@ -278,8 +308,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9FAFB',
   },
   header: {
-    paddingTop: 40,
-    paddingBottom: 6,
+    paddingTop: 50,  // Enough padding to clear status bar and notch
+    paddingBottom: 2, // Minimal bottom padding
   },
   headerContent: {
     paddingHorizontal: 20,
@@ -319,6 +349,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flex: 1,
+    paddingBottom: 100, // Extra padding to avoid tab bar
   },
   statusContainer: {
     flexDirection: 'row',

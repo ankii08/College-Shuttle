@@ -99,9 +99,11 @@ export default function TabLayout() {
         tabBarStyle: {
           backgroundColor: '#FFFFFF',
           borderTopColor: '#E5E7EB',
-          paddingBottom: 5,
-          paddingTop: 5,
-          height: 60,
+          paddingBottom: 25, // Increased from 5 to avoid home indicator
+          paddingTop: 8,     // Slightly increased from 5
+          height: 80,        // Increased from 60 to accommodate more padding
+          position: 'absolute',
+          bottom: 0,
         },
       }}>
       <Tabs.Screen

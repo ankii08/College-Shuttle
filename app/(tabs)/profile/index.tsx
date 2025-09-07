@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Alert, ScrollView } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { LinearGradient } from 'expo-linear-gradient'
 import { supabase } from '@/lib/supabase'
 import { User, LogOut, Shield, Smartphone, Mail, UserCheck, Car, Settings } from 'lucide-react-native'
@@ -122,7 +123,8 @@ export default function ProfileScreen() {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
+      <ScrollView style={styles.content}>
       <View style={styles.header}>
         <View style={styles.avatarContainer}>
           <User size={48} color="#4B0082" />
@@ -191,7 +193,8 @@ export default function ProfileScreen() {
           © 2025 University of the South
         </Text>
       </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
@@ -199,6 +202,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F9FAFB',
+  },
+  content: {
+    flex: 1,
+    paddingBottom: 100, // Extra padding to avoid tab bar
   },
   loadingContainer: {
     flex: 1,

@@ -23,14 +23,13 @@ WHERE created_at < CURRENT_DATE;
 -- Or if you want to remove ALL old data and start fresh:
 -- DELETE FROM public.vehicle_positions;
 
--- Check what's left
-SELECT 
+-- Check what's left - show latest position for each vehicle
+SELECT DISTINCT ON (v.label)
     v.label as vehicle_name,
-    COUNT(vp.id) as position_count,
-    MAX(vp.timestamp) as latest_ping,
+    COUNT(vp.id) OVER (PARTITION BY v.id) as position_count,
+    vp.timestamp as latest_ping,
     vp.lat,
     vp.lng
 FROM public.vehicles v
 LEFT JOIN public.vehicle_positions vp ON v.id = vp.vehicle_id
-GROUP BY v.id, v.label, vp.lat, vp.lng
-ORDER BY v.label, vp.timestamp DESC;
+ORDER BY v.label, vp.timestamp DESC NULLS LAST;

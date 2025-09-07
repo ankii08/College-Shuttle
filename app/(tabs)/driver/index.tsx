@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Switch, ActivityIndicator } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as Location from 'expo-location'
 import * as TaskManager from 'expo-task-manager'
@@ -361,15 +362,16 @@ export default function DriverScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Driver Dashboard</Text>
-        {driverInfo && (
-          <Text style={styles.subtitle}>
-            {driverInfo.name} • Vehicle {driverInfo.vehicle_label}
-          </Text>
-        )}
-      </View>
+    <SafeAreaView style={styles.container} edges={['top']}>
+      <View style={styles.content}>
+        <View style={styles.header}>
+          <Text style={styles.title}>Driver Dashboard</Text>
+          {driverInfo && (
+            <Text style={styles.subtitle}>
+              {driverInfo.name} • Vehicle {driverInfo.vehicle_label}
+            </Text>
+          )}
+        </View>
 
       {/* Status Cards */}
       <View style={styles.statusGrid}>
@@ -471,7 +473,8 @@ export default function DriverScreen() {
           • Use &quot;Sync Queue&quot; to force data upload
         </Text>
       </View>
-    </View>
+      </View>
+    </SafeAreaView>
   )
 }
 
@@ -479,7 +482,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F9FAFB',
+  },
+  content: {
+    flex: 1,
     padding: 20,
+    paddingBottom: 100, // Extra padding to avoid tab bar
   },
   header: {
     marginBottom: 24,
