@@ -2,7 +2,7 @@
 
 A comprehensive real-time shuttle tracking system built for the University of the South (Sewanee). The system includes mobile apps for drivers and students, plus a web-based admin dashboard.
 
-## 🏗️ Architecture
+## Architecture
 
 - **Backend**: Supabase (Auth, Postgres + PostGIS, Realtime, Edge Functions)
 - **Mobile Apps**: React Native with Expo (driver and student apps)
@@ -29,7 +29,7 @@ A comprehensive real-time shuttle tracking system built for the University of th
 - Service alert management
 - Route and stop management
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js 18+
@@ -143,7 +143,7 @@ Run the automated test suite:
 - **Row Level Security**: Role-based data access control
 - **ETA Calculations**: View-based ETA estimates using distance/speed
 
-## 🔐 Security
+##  Security
 
 ### Authentication
 - Supabase Auth with email/password
@@ -206,11 +206,11 @@ The system includes built-in monitoring for:
 - Connection pooling and caching
 - Optimized mobile app size
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🎓 Built for University of the South
+##  Built for University of the South
 
 Designed specifically for the Sewanee campus with:
 - Campus-specific sample data
