@@ -1,6 +1,64 @@
-# Sewanee Shuttle Tracking System
+# 🚐 Sewanee Shuttle Tracker
 
-A comprehensive real-time shuttle tracking system built for the University of the South (Sewanee). The system includes mobile apps for drivers and students, plus a web-based admin dashboard.
+> Real-time campus shuttle tracking system serving 500+ students at Sewanee: The University of the South
+
+[![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactnative.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![Expo](https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
+
+A comprehensive real-time shuttle tracking solution featuring GPS tracking, ETA predictions, and multi-role dashboards for students, drivers, and administrators.
+
+## 📸 Screenshots
+
+### Authentication & Student Experience
+<div align="center">
+  <img src="screenshots/login.png" width="250" alt="Login Screen"/>
+  <img src="screenshots/student-map.png" width="250" alt="Student Map View"/>
+</div>
+
+*Clean authentication and real-time shuttle tracking with live location updates*
+
+### Driver Dashboard
+<div align="center">
+  <img src="screenshots/driver-dashboard.png" width="250" alt="Driver Dashboard"/>
+</div>
+
+*Driver interface with GPS tracking, shift management, and connection monitoring*
+
+### Admin Dashboard
+<div align="center">
+  <img src="screenshots/admin-dashboard.png" width="600" alt="Admin Dashboard"/>
+</div>
+
+*Web-based admin panel with live fleet monitoring and vehicle management*
+
+## ✨ Key Features
+
+### 📍 Real-Time GPS Tracking
+- Live location updates every 10 seconds
+- Background tracking with offline queue support
+- Automatic route snapping and progress calculation
+
+### ⏱️ Smart ETA Predictions
+- Dynamic arrival time calculations
+- Distance-based predictions for all shuttle stops
+- Real-time updates as shuttle moves
+
+### 👥 Multi-Role Access
+- **Students**: Track shuttles and view ETAs
+- **Drivers**: Start shifts and broadcast location
+- **Admins**: Monitor fleet and manage system
+
+### 🔄 Real-Time Synchronization
+- Supabase Realtime for instant updates
+- WebSocket connections for all clients
+- Automatic reconnection handling
+
+### 🗺️ Interactive Maps
+- 14 authentic Sewanee campus stops
+- Custom markers and route visualization
+- Satellite and street view options
 
 ## Architecture
 

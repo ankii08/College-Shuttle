@@ -25,11 +25,15 @@
         "UIBackgroundModes": [
           "location",
           "background-processing",
+          "background-fetch",
+          "location",
+          "background-processing",
           "background-fetch"
         ],
         "NSLocationAlwaysAndWhenInUseUsageDescription": "This app needs location access to track shuttle positions for students and enable driver location sharing.",
         "NSLocationWhenInUseUsageDescription": "This app needs location access to show your position on the map and track shuttle locations.",
-        "NSLocationAlwaysUsageDescription": "This app needs location access to continue tracking your location when the app is in the background (drivers only)."
+        "NSLocationAlwaysUsageDescription": "This app needs location access to continue tracking your location when the app is in the background (drivers only).",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -41,7 +45,9 @@
         "FOREGROUND_SERVICE",
         "WAKE_LOCK",
         "INTERNET",
-        "ACCESS_NETWORK_STATE"
+        "ACCESS_NETWORK_STATE",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
       ],
       "foregroundService": {
         "type": "location"
@@ -77,6 +83,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "63bdd4f9-e1fc-4420-8b30-6cbbeca4f1dc"
+      }
     }
   }
 }

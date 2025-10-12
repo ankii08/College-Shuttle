@@ -141,7 +141,7 @@ export default function DriverScreen() {
   const [lastPingTime, setLastPingTime] = useState<Date | null>(null)
   const [queueSize, setQueueSize] = useState(0)
   const [keepScreenAwake, setKeepScreenAwake] = useState(true)
-  const [locationInterval, setLocationInterval] = useState<NodeJS.Timeout | null>(null)
+  const [locationInterval, setLocationInterval] = useState<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
     loadDriverInfo()
